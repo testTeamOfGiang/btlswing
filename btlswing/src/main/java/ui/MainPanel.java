@@ -13,13 +13,11 @@ public class MainPanel extends AbstractJpanel {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void addComponent() {
 		// TODO Auto-generated method stub
 		JButton b = new JButton("button panel1");
 		b.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				frame.p1.setVisible(false);

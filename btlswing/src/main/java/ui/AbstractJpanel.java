@@ -4,6 +4,10 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+/**
+ * @author huylam98it
+ *
+ */
 public abstract class AbstractJpanel extends JPanel implements UIComponent {
 	private static final long serialVersionUID = 1L;
 	protected MainFrame frame;
@@ -13,7 +17,6 @@ public abstract class AbstractJpanel extends JPanel implements UIComponent {
 		this.addComponent();
 	}
 
-	@Override
 	public void init() {
 		this.setSize(900, 700);
 		this.setBackground(Color.gray);
