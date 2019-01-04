@@ -21,7 +21,7 @@ public class JpaConfig {
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		dataSource.setUrl("jdbc:sqlserver://localhost;database=testdb");
+		dataSource.setUrl("jdbc:sqlserver://localhost;database=btljava");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("Huylam98");
 		return dataSource;

@@ -23,7 +23,7 @@ public class Khoahoc implements Serializable {
 	private int khoahocGia;
 
 	@Column(name = "khoahoc_ten")
-	private Object khoahocTen;
+	private String khoahocTen;
 
 	@OneToMany(mappedBy = "khoahoc")
 	private List<HocvienKhoahoc> hocvienKhoahocs;
@@ -51,11 +51,11 @@ public class Khoahoc implements Serializable {
 		this.khoahocGia = khoahocGia;
 	}
 
-	public Object getKhoahocTen() {
+	public String getKhoahocTen() {
 		return this.khoahocTen;
 	}
 
-	public void setKhoahocTen(Object khoahocTen) {
+	public void setKhoahocTen(String khoahocTen) {
 		this.khoahocTen = khoahocTen;
 	}
 

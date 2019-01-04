@@ -23,7 +23,7 @@ public class Hocvien implements Serializable {
 	private String hocvienSdt;
 
 	@Column(name = "hocvien_ten")
-	private Object hocvienTen;
+	private String hocvienTen;
 
 	@Column(name = "hovien_tuoi")
 	private int hovienTuoi;
@@ -50,11 +50,11 @@ public class Hocvien implements Serializable {
 		this.hocvienSdt = hocvienSdt;
 	}
 
-	public Object getHocvienTen() {
+	public String getHocvienTen() {
 		return this.hocvienTen;
 	}
 
-	public void setHocvienTen(Object hocvienTen) {
+	public void setHocvienTen(String hocvienTen) {
 		this.hocvienTen = hocvienTen;
 	}
 

@@ -23,7 +23,7 @@ public class Giangvien implements Serializable {
 	private String giangvienSdt;
 
 	@Column(name = "giangvien_ten")
-	private Object giangvienTen;
+	private String giangvienTen;
 
 	// bi-directional many-to-one association to Khoahoc
 	@OneToMany(mappedBy = "giangvienBean")
@@ -48,11 +48,11 @@ public class Giangvien implements Serializable {
 		this.giangvienSdt = giangvienSdt;
 	}
 
-	public Object getGiangvienTen() {
+	public String getGiangvienTen() {
 		return this.giangvienTen;
 	}
 
-	public void setGiangvienTen(Object giangvienTen) {
+	public void setGiangvienTen(String giangvienTen) {
 		this.giangvienTen = giangvienTen;
 	}
 

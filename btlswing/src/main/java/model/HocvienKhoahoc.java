@@ -19,10 +19,12 @@ public class HocvienKhoahoc implements Serializable {
 	private boolean dongtien;
 
 	@ManyToOne
+	@MapsId("hocvienMa")
 	@JoinColumn(name = "hocvien_ma")
 	private Hocvien hocvien;
 
 	@ManyToOne
+	@MapsId("khoahocMa")
 	@JoinColumn(name = "khoahoc_ma")
 	private Khoahoc khoahoc;
 

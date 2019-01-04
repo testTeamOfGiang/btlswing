@@ -11,8 +11,6 @@ public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	MainPanel p1;
-	Panel2 p2;
 	public MainFrame() {
 		init();
 		addComponent();
@@ -28,8 +26,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				int result = JOptionPane.showOptionDialog(null, "ban co muon thoat khong", "xac nhan",
-						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[] { "co", "khong" },
-						JOptionPane.NO_OPTION);
+						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null,
+						new String[] { "dong y", "khong" }, JOptionPane.NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					e.getWindow().dispose();
 				}
@@ -38,11 +36,6 @@ public class MainFrame extends JFrame {
 	}
 
 	public void addComponent() {
-		 p1 = new MainPanel(1);
-		 p2 = new Panel2();
-		p1.setFrame(this);
-		p2.setFrame(this);
-		this.add(p1);
-		this.add(p2);
+
 	}
 }
