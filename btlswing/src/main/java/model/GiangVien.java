@@ -10,8 +10,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "GIANGVIEN")
-@NamedQuery(name = "Giangvien.findAll", query = "SELECT g FROM Giangvien g")
-public class Giangvien implements Serializable {
+public class GiangVien implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,9 +26,9 @@ public class Giangvien implements Serializable {
 
 	// bi-directional many-to-one association to Khoahoc
 	@OneToMany(mappedBy = "giangvienBean")
-	private List<Khoahoc> khoahocs;
+	private List<KhoaHoc> khoahocs;
 
-	public Giangvien() {
+	public GiangVien() {
 	}
 
 	public int getGiangvienMa() {
@@ -56,22 +55,22 @@ public class Giangvien implements Serializable {
 		this.giangvienTen = giangvienTen;
 	}
 
-	public List<Khoahoc> getKhoahocs() {
+	public List<KhoaHoc> getKhoahocs() {
 		return this.khoahocs;
 	}
 
-	public void setKhoahocs(List<Khoahoc> khoahocs) {
+	public void setKhoahocs(List<KhoaHoc> khoahocs) {
 		this.khoahocs = khoahocs;
 	}
 
-	public Khoahoc addKhoahoc(Khoahoc khoahoc) {
+	public KhoaHoc addKhoahoc(KhoaHoc khoahoc) {
 		getKhoahocs().add(khoahoc);
 		khoahoc.setGiangvienBean(this);
 
 		return khoahoc;
 	}
 
-	public Khoahoc removeKhoahoc(Khoahoc khoahoc) {
+	public KhoaHoc removeKhoahoc(KhoaHoc khoahoc) {
 		getKhoahocs().remove(khoahoc);
 		khoahoc.setGiangvienBean(null);
 

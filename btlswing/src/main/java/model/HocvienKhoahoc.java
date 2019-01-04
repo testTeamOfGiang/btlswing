@@ -21,12 +21,12 @@ public class HocvienKhoahoc implements Serializable {
 	@ManyToOne
 	@MapsId("hocvienMa")
 	@JoinColumn(name = "hocvien_ma")
-	private Hocvien hocvien;
+	private HocVien hocvien;
 
 	@ManyToOne
 	@MapsId("khoahocMa")
 	@JoinColumn(name = "khoahoc_ma")
-	private Khoahoc khoahoc;
+	private KhoaHoc khoahoc;
 
 	public HocvienKhoahoc() {
 	}
@@ -47,19 +47,19 @@ public class HocvienKhoahoc implements Serializable {
 		this.dongtien = dongtien;
 	}
 
-	public Hocvien getHocvien() {
+	public HocVien getHocvien() {
 		return this.hocvien;
 	}
 
-	public void setHocvien(Hocvien hocvien) {
+	public void setHocvien(HocVien hocvien) {
 		this.hocvien = hocvien;
 	}
 
-	public Khoahoc getKhoahoc() {
+	public KhoaHoc getKhoahoc() {
 		return this.khoahoc;
 	}
 
-	public void setKhoahoc(Khoahoc khoahoc) {
+	public void setKhoahoc(KhoaHoc khoahoc) {
 		this.khoahoc = khoahoc;
 	}
 

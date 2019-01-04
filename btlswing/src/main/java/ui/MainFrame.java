@@ -11,6 +11,10 @@ public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	public MainPanel mainPanel;
+	public QuanLyHocVienPanel quanLyHocVienPanel;
+	public QuanLyKhoaHocPanel quanLyKhoaHocPanel;
+
 	public MainFrame() {
 		init();
 		addComponent();
@@ -21,6 +25,7 @@ public class MainFrame extends JFrame {
 		this.setLayout(new CardLayout());
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
+		this.setTitle("quan ly khoa hoc");
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -36,6 +41,18 @@ public class MainFrame extends JFrame {
 	}
 
 	public void addComponent() {
+		mainPanel = new MainPanel();
+		mainPanel.setFrame(this);
 
+		quanLyHocVienPanel = new QuanLyHocVienPanel();
+		quanLyHocVienPanel.setFrame(this);
+
+		quanLyKhoaHocPanel = new QuanLyKhoaHocPanel();
+		quanLyKhoaHocPanel.setFrame(this);
+
+		this.add(mainPanel);
+		this.add(quanLyHocVienPanel);
+		this.add(quanLyKhoaHocPanel);
 	}
+
 }

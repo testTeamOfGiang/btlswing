@@ -10,8 +10,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "KHOAHOC")
-@NamedQuery(name = "Khoahoc.findAll", query = "SELECT k FROM Khoahoc k")
-public class Khoahoc implements Serializable {
+public class KhoaHoc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -30,9 +29,9 @@ public class Khoahoc implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "giangvien")
-	private Giangvien giangvienBean;
+	private GiangVien giangvienBean;
 
-	public Khoahoc() {
+	public KhoaHoc() {
 	}
 
 	public int getKhoahocMa() {
@@ -81,11 +80,11 @@ public class Khoahoc implements Serializable {
 		return hocvienKhoahoc;
 	}
 
-	public Giangvien getGiangvienBean() {
+	public GiangVien getGiangvienBean() {
 		return this.giangvienBean;
 	}
 
-	public void setGiangvienBean(Giangvien giangvienBean) {
+	public void setGiangvienBean(GiangVien giangvienBean) {
 		this.giangvienBean = giangvienBean;
 	}
 

@@ -3,9 +3,9 @@ package dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import model.Giangvien;
+import model.GiangVien;
 
 @Repository("giangvienDao")
-public interface GiangVienDao extends JpaRepository<Giangvien, Integer> {
+public interface GiangVienDao extends JpaRepository<GiangVien, Integer> {
 
 }

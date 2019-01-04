@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,8 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "HOCVIEN")
-@NamedQuery(name = "Hocvien.findAll", query = "SELECT h FROM Hocvien h")
-public class Hocvien implements Serializable {
+public class HocVien implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,12 +27,12 @@ public class Hocvien implements Serializable {
 	private String hocvienTen;
 
 	@Column(name = "hovien_tuoi")
-	private int hovienTuoi;
+	private int hocvienTuoi;
 
 	@OneToMany(mappedBy = "hocvien")
-	private List<HocvienKhoahoc> hocvienKhoahocs;
+	private List<HocvienKhoahoc> hocvienKhoahocs = new ArrayList<HocvienKhoahoc>();
 
-	public Hocvien() {
+	public HocVien() {
 	}
 
 	public int getHocvienMa() {
@@ -58,12 +59,12 @@ public class Hocvien implements Serializable {
 		this.hocvienTen = hocvienTen;
 	}
 
-	public int getHovienTuoi() {
-		return this.hovienTuoi;
+	public int getHocvienTuoi() {
+		return this.hocvienTuoi;
 	}
 
-	public void setHovienTuoi(int hovienTuoi) {
-		this.hovienTuoi = hovienTuoi;
+	public void setHocvienTuoi(int hovienTuoi) {
+		this.hocvienTuoi = hovienTuoi;
 	}
 
 	public List<HocvienKhoahoc> getHocvienKhoahocs() {
