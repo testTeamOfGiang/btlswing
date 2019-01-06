@@ -24,7 +24,7 @@ public class GiangVien implements Serializable {
 	@Column(name = "giangvien_ten")
 	private String giangvienTen;
 
-	// bi-directional many-to-one association to Khoahoc
+	
 	@OneToMany(mappedBy = "giangvienBean")
 	private List<KhoaHoc> khoahocs;
 

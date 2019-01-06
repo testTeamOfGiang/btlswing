@@ -20,6 +20,7 @@ public class MainPanel extends AbstractJpanel {
 
 	JButton qlHocVien;
 	JButton qlKhoaHoc;
+	JButton qlGiaoVien;
 	JLabel title;
 
 	@Override
@@ -51,9 +52,21 @@ public class MainPanel extends AbstractJpanel {
 			}
 		});
 
+		this.qlGiaoVien = new JButton("Quản lý giáo viên");
+		qlGiaoVien.setBounds(300, 450, 300, 40);
+		qlGiaoVien.setFont(new Font("Courier New", Font.BOLD, 20));
+		qlGiaoVien.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.mainPanel.setVisible(false);
+				frame.quanLyGiaoVienPanel.setVisible(true);
+			}
+		});
+
 		this.add(title);
 		this.add(qlHocVien);
 		this.add(qlKhoaHoc);
+		this.add(qlGiaoVien);
 
 	}
 

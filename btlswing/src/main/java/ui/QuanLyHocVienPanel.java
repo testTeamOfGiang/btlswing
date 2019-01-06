@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,8 +25,9 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 	private static final long serialVersionUID = 1L;
 
 	public JTable table;
+	public JLabel lbname, lbtuoi, lbsdt;
 	public DefaultTableModel tableModel;
-	public JButton back, add, delete, refresh;
+	public JButton back, add, delete, refresh, sua, joint;
 	public JTextField ten, tuoi, sdt;
 	public Map<Integer, Integer> data;
 
@@ -52,8 +55,29 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			}
 		});
 
+		this.lbname = new JLabel("tên", JLabel.RIGHT);
+		lbname.setFont(new Font("", Font.CENTER_BASELINE, 15));
+		lbname.setBounds(250, 440, 100, 40);
+
+		this.lbtuoi = new JLabel("tuổi", JLabel.RIGHT);
+		lbtuoi.setFont(new Font("", Font.CENTER_BASELINE, 15));
+		lbtuoi.setBounds(250, 500, 100, 40);
+
+		this.lbsdt = new JLabel("số đt", JLabel.RIGHT);
+		lbsdt.setFont(new Font("", Font.CENTER_BASELINE, 15));
+		lbsdt.setBounds(250, 560, 100, 40);
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 900, 400);
+
+		this.ten = new JTextField();
+		ten.setBounds(400, 440, 200, 40);
+
+		this.tuoi = new JTextField();
+		tuoi.setBounds(400, 500, 200, 40);
+
+		this.sdt = new JTextField();
+		sdt.setBounds(400, 560, 200, 40);
 
 		this.back = new JButton("Quay lại");
 		back.setBounds(50, 450, 150, 40);
@@ -100,7 +124,7 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 		});
 
 		this.delete = new JButton("xóa");
-		delete.setBounds(700, 550, 150, 40);
+		delete.setBounds(700, 500, 150, 40);
 		delete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -118,23 +142,37 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			}
 		});
 
-		this.ten = new JTextField();
-		ten.setBounds(350, 440, 200, 40);
+		this.joint = new JButton("thêm khóa học");
+		joint.setBounds(700, 600, 150, 40);
+		joint.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-		this.tuoi = new JTextField();
-		tuoi.setBounds(350, 500, 200, 40);
+			}
+		});
 
-		this.sdt = new JTextField();
-		sdt.setBounds(350, 560, 200, 40);
+		this.sua = new JButton("sửa");
+		sua.setBounds(700, 550, 150, 40);
+		sua.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 
 		//////////////
 		this.add(scrollPane);
-		this.add(back);
 		this.add(ten);
 		this.add(tuoi);
 		this.add(sdt);
+		this.add(back);
+		this.add(lbname);
+		this.add(lbtuoi);
+		this.add(lbsdt);
 		this.add(add);
 		this.add(delete);
+		this.add(sua);
+		this.add(joint);
 		this.add(refresh);
 
 		loadData();
