@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +15,7 @@ public interface GiangVienDao extends JpaRepository<GiangVien, Integer> {
 
 	@Query("select g from GiangVien g join fetch g.khoahocs where g.giangvienMa = :id")
 	public GiangVien getGiangVien(@Param("id") int id);
+	
+	@Query("select g from GiangVien g")
+	public List<GiangVien> getPage(Pageable page);
 }

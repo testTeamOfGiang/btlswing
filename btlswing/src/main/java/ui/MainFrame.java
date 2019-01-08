@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
 	public MainPanel mainPanel;
 	public QuanLyHocVienPanel quanLyHocVienPanel;
 	public QuanLyKhoaHocPanel quanLyKhoaHocPanel;
-	public QuanLyGiaoVienPanel quanLyGiaoVienPanel;
+	public QuanLyGiangVienPanel quanLyGiaoVienPanel;
 
 	public MainFrame() {
 		init();
@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
 		quanLyKhoaHocPanel = new QuanLyKhoaHocPanel();
 		quanLyKhoaHocPanel.setFrame(this);
 		
-		quanLyGiaoVienPanel=new QuanLyGiaoVienPanel();
+		quanLyGiaoVienPanel=new QuanLyGiangVienPanel();
 		quanLyGiaoVienPanel.setFrame(this);
 
 		this.add(mainPanel);

@@ -2,6 +2,9 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
@@ -19,29 +22,38 @@ import javax.swing.table.DefaultTableModel;
 import org.springframework.data.domain.PageRequest;
 
 import main.MainApp;
-import model.HocVien;
+import model.GiangVien;
 
-public class QuanLyHocVienPanel extends AbstractJpanel {
+public class QuanLyGiangVienPanel extends AbstractJpanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private JTextField ten;
+	private JTextField sdt;
 	public JTable table;
 	public DefaultTableModel tableModel;
 	public Map<Integer, Integer> data;
 	public int page;
-	private JTextField ten;
-	private JTextField sdt;
-	private JTextField tuoi;
+	private KeyListener KeyListener;
 
 	@Override
 	public void addComponent() {
 		page = 0;
 		data = new HashMap<Integer, Integer>();
+		this.KeyListener=new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					sdt.requestFocus();
+				}
+				System.out.println(e.getSource().equals(sdt));
+			}
+		};
 		this.tableModel = new DefaultTableModel(new Object[][] {},
-				new String[] { "stt", "tên học viên", "tuổi học viên", "sdt học viên", "khóa học tham gia" }) {
+				new String[] { "stt", "tên giảng viên", "sdt giảng viên", "số lớp dạy" }) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -57,16 +69,16 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
 					int current = table.getSelectedRow();
-					HocVien hv = MainApp.hocvienDao.findById(data.get(current)).get();
-					ten.setText(hv.getHocvienTen());
-					sdt.setText(hv.getHocvienSdt());
-					tuoi.setText(hv.getHocvienTuoi() + "");
+					GiangVien gv = MainApp.giangvienDao.findById(data.get(current)).get();
+					ten.setText(gv.getGiangvienTen());
+					sdt.setText(gv.getGiangvienSdt());
 				}
 				if (e.getClickCount() == 2) {
 					System.out.println("hello");
 				}
 			}
 		});
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 0, 900, 400);
 		this.add(scrollPane);
@@ -74,6 +86,12 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 		JButton btnPre = new JButton("pre");
 		btnPre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (page > 0) {
+					page -= 1;
+					loadData();
+				} else {
+					JOptionPane.showMessageDialog(frame, "đã là trang đầu tiên");
+				}
 			}
 		});
 		btnPre.setBounds(245, 412, 117, 40);
@@ -82,6 +100,21 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 		JButton btnNext = new JButton("next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				long size = MainApp.giangvienDao.count();
+				int pc = 0;
+				int tam = (int) (size % 50);
+				if (tam == 0) {
+					pc = (int) (size / 50);
+				} else {
+					pc = (int) (size / 50 + 1);
+				}
+				if (page < pc) {
+					page++;
+					loadData();
+				} else {
+					JOptionPane.showMessageDialog(frame, "đã là trang cuối cùng");
+				}
+				btnPre.setEnabled(true);
 			}
 		});
 		btnNext.setBounds(488, 412, 117, 40);
@@ -92,7 +125,7 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 		btnBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.quanLyHocVienPanel.setVisible(false);
+				frame.quanLyGiaoVienPanel.setVisible(false);
 				frame.mainPanel.setVisible(true);
 			}
 		});
@@ -108,21 +141,22 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 		});
 		add(btnRefresh);
 
-		JLabel lblTnGingVin = new JLabel("tên học viên");
-		lblTnGingVin.setBounds(240, 484, 101, 35);
+		JLabel lblTnGingVin = new JLabel("tên giảng viên");
+		lblTnGingVin.setBounds(240, 504, 101, 35);
 		add(lblTnGingVin);
 
 		ten = new JTextField();
-		ten.setBounds(359, 484, 246, 35);
+		ten.setBounds(359, 504, 246, 35);
+		ten.addKeyListener(KeyListener);
 		add(ten);
 		ten.setColumns(10);
 
-		JLabel lblSdtGingVin = new JLabel("sdt học viên");
-		lblSdtGingVin.setBounds(241, 545, 100, 35);
+		JLabel lblSdtGingVin = new JLabel("sdt giảng viên");
+		lblSdtGingVin.setBounds(241, 565, 100, 35);
 		add(lblSdtGingVin);
 
 		sdt = new JTextField();
-		sdt.setBounds(359, 545, 246, 35);
+		sdt.setBounds(359, 565, 246, 35);
 		add(sdt);
 		sdt.setColumns(10);
 
@@ -133,21 +167,20 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String name = ten.getText();
-					int age = Integer.parseInt(tuoi.getText());
 					String phone = sdt.getText();
-					HocVien hv = new HocVien();
-					hv.setHocvienTen(name);
-					hv.setHocvienTuoi(age);
-					hv.setHocvienSdt(phone);
-					if (name.trim().equals("") | phone.trim().equals("")) {
+					if (name.trim().equals("") || phone.trim().equals("")) {
+						JOptionPane.showMessageDialog(frame, "hãy nhập đầy đủ thông tin");
 						throw new Exception();
 					}
-					MainApp.hocvienDao.save(hv);
-					JOptionPane.showMessageDialog(frame, "them hoc vien thanh cong");
+					GiangVien gv = new GiangVien();
+					gv.setGiangvienTen(name);
+					gv.setGiangvienSdt(phone);
+					MainApp.giangvienDao.save(gv);
+					JOptionPane.showMessageDialog(frame, "thêm giảng viên thành công");
+					loadData();
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(frame, "them hoc vien khong thanh cong");
+					JOptionPane.showMessageDialog(frame, "thêm không thành công");
 				}
-				loadData();
 			}
 		});
 		add(btnThm);
@@ -158,26 +191,24 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(frame, "hãy chọn một bản ghi trước khi xóa");
+					JOptionPane.showMessageDialog(frame, "chọn một bản ghi để sửa");
 				} else {
 					try {
 						int current = table.getSelectedRow();
-						HocVien hv = MainApp.hocvienDao.findById(data.get(current)).get();
-						MainApp.hocvienDao.delete(hv);
+						GiangVien gv = MainApp.giangvienDao.findById(data.get(current)).get();
 						String name = ten.getText();
 						String phone = sdt.getText();
-						int age = Integer.parseInt(sdt.getText());
 						if (name.trim().equals("") || phone.trim().equals("")) {
+							JOptionPane.showMessageDialog(frame, "Hãy nhập dữ liệu để sửa");
 							throw new Exception();
 						}
-						hv.setHocvienTen(name);
-						hv.setHocvienSdt(phone);
-						hv.setHocvienTuoi(age);
-						MainApp.hocvienDao.save(hv);
-						JOptionPane.showMessageDialog(frame, "sửa học viên thành công");
+						gv.setGiangvienTen(name);
+						gv.setGiangvienSdt(phone);
+						MainApp.giangvienDao.save(gv);
+						JOptionPane.showMessageDialog(frame, "Sửa giảng viên thành công");
 						loadData();
 					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(frame, "sửa học viên không thành công");
+						JOptionPane.showMessageDialog(frame, "Sửa giảng viên không thành công");
 					}
 				}
 			}
@@ -190,54 +221,47 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(frame, "hãy chọn một bản ghi trước khi xóa");
-				} else
+					JOptionPane.showMessageDialog(frame, "Hãy chọn một bản ghi trước khi xóa");
+				} else {
 					try {
-						HocVien hv = MainApp.hocvienDao.findById(data.get(table.getSelectedRow())).get();
-						MainApp.hocvienDao.delete(hv);
-						JOptionPane.showMessageDialog(frame, "xóa thành công");
+						int current = table.getSelectedRow();
+						GiangVien gv = MainApp.giangvienDao.findById(data.get(current)).get();
+						MainApp.giangvienDao.delete(gv);
+						JOptionPane.showMessageDialog(frame, "xóa giảng viên thành công");
+						loadData();
 					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(frame, "xóa không thành công");
+						JOptionPane.showMessageDialog(frame, "xóa giảng viên không thành công");
 					}
-				loadData();
+				}
 			}
 		});
 		add(btnXa);
 
-		JLabel lblNewLabel = new JLabel("tuổi học viên");
-		lblNewLabel.setBounds(245, 603, 96, 40);
-		add(lblNewLabel);
-
-		tuoi = new JTextField();
-		tuoi.setBounds(359, 604, 246, 35);
-		add(tuoi);
-		tuoi.setColumns(10);
-
-		////////////////////////////////////
 		loadData();
 	}
 
 	public void loadData() {
-		if (data.size() > 0) {
-			data.clear();
+		if (this.data.size() > 0) {
+			this.data.clear();
 		}
 		while (table.getRowCount() > 0) {
 			tableModel.removeRow(0);
 		}
-		List<HocVien> list = MainApp.hocvienDao.getPage(PageRequest.of(page, 50));
 		int stt = 1;
-		for (HocVien h : list) {
-			String name = h.getHocvienTen();
-			int age = h.getHocvienTuoi();
-			String phone = h.getHocvienSdt();
-			HocVien tam = MainApp.hocvienDao.getHocVien(h.getHocvienMa());
-			int sl = 0;
+		List<GiangVien> list = MainApp.giangvienDao.getPage(PageRequest.of(this.page, 50));
+		System.out.println(list.size());
+		for (GiangVien gv : list) {
+			String gvten = gv.getGiangvienTen();
+			String gvsdt = gv.getGiangvienSdt();
+			int solop = 0;
+			GiangVien tam = MainApp.giangvienDao.getGiangVien(gv.getGiangvienMa());
 			if (tam != null) {
-				sl = tam.getHocvienKhoahocs().size();
+				solop = tam.getKhoahocs().size();
 			}
-			tableModel.addRow(new Object[] { stt, name, age, phone, sl });
-			data.put(stt - 1, h.getHocvienMa());
+			tableModel.addRow(new Object[] { stt, gvten, gvsdt, solop });
+			data.put(stt - 1, gv.getGiangvienMa());
 			stt += 1;
 		}
 	}
+
 }
