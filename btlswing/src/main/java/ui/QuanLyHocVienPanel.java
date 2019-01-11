@@ -158,7 +158,7 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(frame, "hãy chọn một bản ghi trước khi xóa");
+					JOptionPane.showMessageDialog(frame, "hãy chọn một bản ghi trước khi sửa");
 				} else {
 					try {
 						int current = table.getSelectedRow();

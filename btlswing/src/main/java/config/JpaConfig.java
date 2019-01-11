@@ -23,7 +23,7 @@ public class JpaConfig {
 		dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		dataSource.setUrl("jdbc:sqlserver://localhost;database=btljava");
 		dataSource.setUsername("sa");
-		dataSource.setPassword("Huylam98");
+		dataSource.setPassword("huylam98");
 		return dataSource;
 	}
 

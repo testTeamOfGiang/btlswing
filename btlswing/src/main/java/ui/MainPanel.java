@@ -26,11 +26,11 @@ public class MainPanel extends AbstractJpanel {
 	@Override
 	public void addComponent() {
 		// TODO Auto-generated method stub
-		this.title = new JLabel("Chương Trình Quản Lý Khóa Học");
+		this.title = new JLabel("Quản lý khóa học");
 		title.setFont(new Font("Courier New", Font.BOLD, 32));
 		title.setBounds(150, 70, 600, 40);
 
-		this.qlHocVien = new JButton("Quản lý học viên");
+		this.qlHocVien = new JButton("QUẢN LÝ HỌC VIÊN");
 		qlHocVien.setFont(new Font("Courier New", Font.BOLD, 20));
 		qlHocVien.setBounds(300, 250, 300, 40);
 		qlHocVien.addActionListener(new ActionListener() {
@@ -41,7 +41,7 @@ public class MainPanel extends AbstractJpanel {
 			}
 		});
 
-		this.qlKhoaHoc = new JButton("Quản lý khóa học");
+		this.qlKhoaHoc = new JButton("QUẢN LÝ KHÓA HỌC");
 		qlKhoaHoc.setBounds(300, 350, 300, 40);
 		qlKhoaHoc.setFont(new Font("Courier New", Font.BOLD, 20));
 		qlKhoaHoc.addActionListener(new ActionListener() {
@@ -52,7 +52,7 @@ public class MainPanel extends AbstractJpanel {
 			}
 		});
 
-		this.qlGiaoVien = new JButton("Quản lý giáo viên");
+		this.qlGiaoVien = new JButton("QUẢN LÝ GIẢNG VIÊN");
 		qlGiaoVien.setBounds(300, 450, 300, 40);
 		qlGiaoVien.setFont(new Font("Courier New", Font.BOLD, 20));
 		qlGiaoVien.addActionListener(new ActionListener() {

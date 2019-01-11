@@ -43,10 +43,10 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 	public void addComponent() {
 		page = 0;
 		data = new HashMap<Integer, Integer>();
-		this.KeyListener=new KeyAdapter() {
+		this.KeyListener = new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					sdt.requestFocus();
 				}
 				System.out.println(e.getSource().equals(sdt));
@@ -169,7 +169,7 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 					String name = ten.getText();
 					String phone = sdt.getText();
 					if (name.trim().equals("") || phone.trim().equals("")) {
-						JOptionPane.showMessageDialog(frame, "hãy nhập đầy đủ thông tin");
+						JOptionPane.showMessageDialog(frame, "hãy nhập đủ thông tin");
 						throw new Exception();
 					}
 					GiangVien gv = new GiangVien();
@@ -179,7 +179,7 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 					JOptionPane.showMessageDialog(frame, "thêm giảng viên thành công");
 					loadData();
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(frame, "thêm không thành công");
+					JOptionPane.showMessageDialog(frame, "thêm giảng viên không thành công");
 				}
 			}
 		});
@@ -191,7 +191,7 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(frame, "chọn một bản ghi để sửa");
+					JOptionPane.showMessageDialog(frame, "chọn một bản ghi trước khi sửa");
 				} else {
 					try {
 						int current = table.getSelectedRow();
@@ -199,13 +199,13 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 						String name = ten.getText();
 						String phone = sdt.getText();
 						if (name.trim().equals("") || phone.trim().equals("")) {
-							JOptionPane.showMessageDialog(frame, "Hãy nhập dữ liệu để sửa");
+							JOptionPane.showMessageDialog(frame, "Hãy nhập đủ thông tin");
 							throw new Exception();
 						}
 						gv.setGiangvienTen(name);
 						gv.setGiangvienSdt(phone);
 						MainApp.giangvienDao.save(gv);
-						JOptionPane.showMessageDialog(frame, "Sửa giảng viên thành công");
+						JOptionPane.showMessageDialog(frame, "sửa giảng viên thành công");
 						loadData();
 					} catch (Exception ex) {
 						JOptionPane.showMessageDialog(frame, "Sửa giảng viên không thành công");
