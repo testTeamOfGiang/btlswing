@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ public class KhoaHoc implements Serializable {
 	private String khoahocTen;
 
 	@OneToMany(mappedBy = "khoahoc")
-	private List<HocvienKhoahoc> hocvienKhoahocs;
+	private List<HocvienKhoahoc> hocvienKhoahocs=new ArrayList<HocvienKhoahoc>();
 
 	@ManyToOne
 	@JoinColumn(name = "giangvien")

@@ -66,6 +66,12 @@ public class QuanLyKhoaHocPanel extends AbstractJpanel {
 					textField_1.setText(kh.getKhoahocGia() + "");
 					textField_2.setText(kh.getGiangvienBean().getGiangvienMa() + "");
 				}
+				if (e.getClickCount() == 2) {
+					frame.quanLyKhoaHocPanel.setVisible(false);
+					frame.thongTinKhoaHoc.khId = kh.getKhoahocMa();
+					frame.thongTinKhoaHoc.setVisible(true);
+					frame.thongTinKhoaHoc.loadData();
+				}
 			}
 		});
 		JScrollPane scrollPane = new JScrollPane(table);
