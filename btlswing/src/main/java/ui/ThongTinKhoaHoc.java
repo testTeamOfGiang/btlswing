@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 
 import main.MainApp;
 import model.HocVien;
-import model.HocvienKhoahoc;
 import model.KhoaHoc;
 
 public class ThongTinKhoaHoc extends AbstractJpanel {
@@ -32,7 +31,7 @@ public class ThongTinKhoaHoc extends AbstractJpanel {
 	@Override
 	public void addComponent() {
 		tableModel = new DefaultTableModel(new Object[][] {},
-				new String[] { "Stt", "Mã học viên", "Tên học viên", "học phí" }) {
+				new String[] { "Stt", "Mã học viên", "Tên học viên", "sdt" }) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -90,12 +89,11 @@ public class ThongTinKhoaHoc extends AbstractJpanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					HocVien hv = MainApp.hocvienDao.findById(Integer.parseInt(textField.getText())).get();
-					HocvienKhoahoc hvkh = new HocvienKhoahoc();
-					hvkh.setHocvien(hv);
-					hvkh.setKhoahoc(MainApp.khoahocDao.findById(khId).get());
-					hvkh.setDongtien(false);
-					MainApp.hocvien_khoahocDao.save(hvkh);
+					KhoaHoc kh = MainApp.khoahocDao.findById(khId).get();
+					hv.getKhoahocs().add(kh);
+					MainApp.hocvienDao.save(hv);
 					JOptionPane.showMessageDialog(frame, "Đăng ký học thành công");
+					loadData();
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(frame, "Đăng ký học không thành công");
 				}
@@ -103,8 +101,15 @@ public class ThongTinKhoaHoc extends AbstractJpanel {
 		});
 		add(btnThm);
 
-		JButton btnngHcPh = new JButton("Đóng học phí");
+		JButton btnngHcPh = new JButton("refresh");
 		btnngHcPh.setBounds(691, 216, 109, 40);
+		btnngHcPh.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadData();
+			}
+		});
 		add(btnngHcPh);
 
 		JButton btnQuayLi = new JButton("Quay lại");
@@ -153,19 +158,13 @@ public class ThongTinKhoaHoc extends AbstractJpanel {
 		textField_2.setText(tam.getKhoahocTen());
 		textField_3.setText(MainApp.khoahocDao.findById(khId).get().getGiangvienBean().getGiangvienTen());
 		textField_4.setText(tam.getKhoahocGia() + "");
-		KhoaHoc kh = MainApp.khoahocDao.getKhoaHoc(khId);
-		if (kh != null) {
-			List<HocvienKhoahoc> hvkhs = kh.getHocvienKhoahocs();
-			for (HocvienKhoahoc hvkh : hvkhs) {
-				HocVien hv = hvkh.getHocvien();
-				String dongTien = "chưa đóng";
-				if (hvkh.getDongtien()) {
-					dongTien = "đã đóng";
-				}
-				tableModel.addRow(new Object[] { stt, hv.getHocvienMa(), hv.getHocvienTen(), dongTien });
-				stt += 1;
-			}
+
+		List<HocVien> hvs = tam.getHocviens();
+		for (HocVien hv : hvs) {
+			tableModel.addRow(new Object[] { stt, hv.getHocvienMa(), hv.getHocvienTen(), hv.getHocvienSdt() });
+			stt += 1;
 		}
+
 	}
 
 }

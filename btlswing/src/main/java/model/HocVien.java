@@ -2,8 +2,6 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,10 +25,13 @@ public class HocVien implements Serializable {
 	private String hocvienTen;
 
 	@Column(name = "hovien_tuoi")
-	private int hocvienTuoi;
+	private int hovienTuoi;
 
-	@OneToMany(mappedBy = "hocvien")
-	private List<HocvienKhoahoc> hocvienKhoahocs = new ArrayList<HocvienKhoahoc>();
+	// bi-directional many-to-many association to Khoahoc
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "HOCVIEN_KHOAHOC", joinColumns = { @JoinColumn(name = "hocvien_ma") }, inverseJoinColumns = {
+			@JoinColumn(name = "khoahoc_ma") })
+	private List<KhoaHoc> khoahocs;
 
 	public HocVien() {
 	}
@@ -60,33 +61,19 @@ public class HocVien implements Serializable {
 	}
 
 	public int getHocvienTuoi() {
-		return this.hocvienTuoi;
+		return this.hovienTuoi;
 	}
 
 	public void setHocvienTuoi(int hovienTuoi) {
-		this.hocvienTuoi = hovienTuoi;
+		this.hovienTuoi = hovienTuoi;
 	}
 
-	public List<HocvienKhoahoc> getHocvienKhoahocs() {
-		return this.hocvienKhoahocs;
+	public List<KhoaHoc> getKhoahocs() {
+		return this.khoahocs;
 	}
 
-	public void setHocvienKhoahocs(List<HocvienKhoahoc> hocvienKhoahocs) {
-		this.hocvienKhoahocs = hocvienKhoahocs;
-	}
-
-	public HocvienKhoahoc addHocvienKhoahoc(HocvienKhoahoc hocvienKhoahoc) {
-		getHocvienKhoahocs().add(hocvienKhoahoc);
-		hocvienKhoahoc.setHocvien(this);
-
-		return hocvienKhoahoc;
-	}
-
-	public HocvienKhoahoc removeHocvienKhoahoc(HocvienKhoahoc hocvienKhoahoc) {
-		getHocvienKhoahocs().remove(hocvienKhoahoc);
-		hocvienKhoahoc.setHocvien(null);
-
-		return hocvienKhoahoc;
+	public void setKhoahocs(List<KhoaHoc> khoahocs) {
+		this.khoahocs = khoahocs;
 	}
 
 }

@@ -13,7 +13,7 @@ import model.HocVien;
 @Repository("hocvienDao")
 public interface HocVienDao extends JpaRepository<HocVien, Integer> {
 
-	@Query("select h from HocVien h join fetch h.hocvienKhoahocs where h.hocvienMa = :ma")
+	@Query("select h from HocVien h join fetch h.khoahocs where h.hocvienMa = :ma")
 	public HocVien getHocVien(@Param("ma") int ma);
 
 	@Query("select h from HocVien h")

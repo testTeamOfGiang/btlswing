@@ -12,7 +12,6 @@ import dao.GiangVienDao;
 import dao.HocVienDao;
 import dao.HocVienKhoaHocDao;
 import dao.KhoaHocDao;
-import model.HocvienKhoahoc;
 import ui.MainFrame;
 
 public class MainApp {
@@ -33,13 +32,15 @@ public class MainApp {
 
 	public static void main(String[] args) throws UnsupportedLookAndFeelException {
 		MainApp.init();
+
+		UIManager.setLookAndFeel(new NimbusLookAndFeel());
+		new MainFrame().setVisible(true);
+
 		/*
-		 * UIManager.setLookAndFeel(new NimbusLookAndFeel()); new
-		 * MainFrame().setVisible(true);
+		 * HocvienKhoahoc hvkh = new HocvienKhoahoc();
+		 * hvkh.setHocvien(MainApp.hocvienDao.findById(3).get());
+		 * hvkh.setKhoahoc(MainApp.khoahocDao.findById(1).get());
+		 * MainApp.hocvien_khoahocDao.save(hvkh);
 		 */
-		HocvienKhoahoc hvkh = new HocvienKhoahoc();
-		hvkh.setHocvien(MainApp.hocvienDao.findById(3).get());
-		hvkh.setKhoahoc(MainApp.khoahocDao.findById(1).get());
-		MainApp.hocvien_khoahocDao.save(hvkh);
 	}
 }

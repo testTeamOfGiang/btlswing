@@ -26,8 +26,8 @@ public class KhoaHoc implements Serializable {
 	@Column(name = "khoahoc_ten")
 	private String khoahocTen;
 
-	@OneToMany(mappedBy = "khoahoc")
-	private List<HocvienKhoahoc> hocvienKhoahocs=new ArrayList<HocvienKhoahoc>();
+	@ManyToMany(mappedBy = "khoahocs",fetch=FetchType.EAGER)
+	private List<HocVien> hocviens = new ArrayList<HocVien>();
 
 	@ManyToOne
 	@JoinColumn(name = "giangvien")
@@ -60,26 +60,12 @@ public class KhoaHoc implements Serializable {
 		this.khoahocTen = khoahocTen;
 	}
 
-	public List<HocvienKhoahoc> getHocvienKhoahocs() {
-		return this.hocvienKhoahocs;
+	public List<HocVien> getHocviens() {
+		return this.hocviens;
 	}
 
-	public void setHocvienKhoahocs(List<HocvienKhoahoc> hocvienKhoahocs) {
-		this.hocvienKhoahocs = hocvienKhoahocs;
-	}
-
-	public HocvienKhoahoc addHocvienKhoahoc(HocvienKhoahoc hocvienKhoahoc) {
-		getHocvienKhoahocs().add(hocvienKhoahoc);
-		hocvienKhoahoc.setKhoahoc(this);
-
-		return hocvienKhoahoc;
-	}
-
-	public HocvienKhoahoc removeHocvienKhoahoc(HocvienKhoahoc hocvienKhoahoc) {
-		getHocvienKhoahocs().remove(hocvienKhoahoc);
-		hocvienKhoahoc.setKhoahoc(null);
-
-		return hocvienKhoahoc;
+	public void setHocviens(List<HocVien> hocviens) {
+		this.hocviens = hocviens;
 	}
 
 	public GiangVien getGiangvienBean() {

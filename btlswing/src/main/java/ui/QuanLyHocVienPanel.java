@@ -233,7 +233,7 @@ public class QuanLyHocVienPanel extends AbstractJpanel {
 			HocVien tam = MainApp.hocvienDao.getHocVien(h.getHocvienMa());
 			int sl = 0;
 			if (tam != null) {
-				sl = tam.getHocvienKhoahocs().size();
+				sl = tam.getKhoahocs().size();
 			}
 			tableModel.addRow(new Object[] { stt, name, age, phone, sl });
 			data.put(stt - 1, h.getHocvienMa());
