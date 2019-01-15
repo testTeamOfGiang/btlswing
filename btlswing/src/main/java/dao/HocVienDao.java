@@ -18,4 +18,7 @@ public interface HocVienDao extends JpaRepository<HocVien, Integer> {
 
 	@Query("select h from HocVien h")
 	public List<HocVien> getPage(Pageable page);
+
+	@Query("select h from HocVien h where h.hocvienTen like concat('%',:str,'%')")
+	public List<HocVien> search(@Param("str") String str);
 }

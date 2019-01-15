@@ -132,7 +132,7 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 		add(btnBack);
 
 		JButton btnRefresh = new JButton("refresh");
-		btnRefresh.setBounds(40, 555, 117, 40);
+		btnRefresh.setBounds(40, 514, 117, 40);
 		btnRefresh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -140,6 +140,18 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 			}
 		});
 		add(btnRefresh);
+
+		JButton search = new JButton("Tìm kiếm");
+		search.setBounds(40, 570, 117, 40);
+		search.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.quanLyGiaoVienPanel.setVisible(false);
+				frame.timGiangVienPanel.setVisible(true);
+			}
+		});
+		this.add(search);
 
 		JLabel lblTnGingVin = new JLabel("tên giảng viên");
 		lblTnGingVin.setBounds(240, 504, 101, 35);

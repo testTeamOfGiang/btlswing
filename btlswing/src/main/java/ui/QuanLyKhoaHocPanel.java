@@ -101,6 +101,8 @@ public class QuanLyKhoaHocPanel extends AbstractJpanel {
 		JButton btnTmKim = new JButton("Tìm kiếm");
 		btnTmKim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame.quanLyKhoaHocPanel.setVisible(false);
+				frame.timKhoaHocPanel.setVisible(true);
 			}
 		});
 		btnTmKim.setBounds(45, 616, 109, 40);

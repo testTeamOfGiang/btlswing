@@ -18,4 +18,7 @@ public interface KhoaHocDao extends JpaRepository<KhoaHoc, Integer> {
 
 	@Query("select kh from KhoaHoc kh")
 	public List<KhoaHoc> getPage(Pageable page);
+
+	@Query("select kh from KhoaHoc kh where kh.khoahocTen like concat('%',:str,'%')")
+	public List<KhoaHoc> Search(@Param("str") String str);
 }

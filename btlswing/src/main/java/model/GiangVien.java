@@ -24,8 +24,7 @@ public class GiangVien implements Serializable {
 	@Column(name = "giangvien_ten")
 	private String giangvienTen;
 
-	
-	@OneToMany(mappedBy = "giangvienBean")
+	@OneToMany(mappedBy = "giangvienBean", fetch = FetchType.EAGER)
 	private List<KhoaHoc> khoahocs;
 
 	public GiangVien() {
