@@ -261,16 +261,10 @@ public class QuanLyGiangVienPanel extends AbstractJpanel {
 		}
 		int stt = 1;
 		List<GiangVien> list = MainApp.giangvienDao.getPage(PageRequest.of(this.page, 50));
-		System.out.println(list.size());
 		for (GiangVien gv : list) {
 			String gvten = gv.getGiangvienTen();
 			String gvsdt = gv.getGiangvienSdt();
-			int solop = 0;
-			GiangVien tam = MainApp.giangvienDao.getGiangVien(gv.getGiangvienMa());
-			if (tam != null) {
-				solop = tam.getKhoahocs().size();
-			}
-			tableModel.addRow(new Object[] { stt, gvten, gvsdt, solop });
+			tableModel.addRow(new Object[] { stt, gvten, gvsdt, gv.getKhoahocs().size() });
 			data.put(stt - 1, gv.getGiangvienMa());
 			stt += 1;
 		}
